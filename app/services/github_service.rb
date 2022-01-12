@@ -20,9 +20,8 @@ class GithubService
     # users
   end
 
-  def user_pr
-    api = get_url("little-esty-shop/pulls?state=closed")
-    api[0][:number]
+  def pull_requets
+    get_url("little-esty-shop/pulls?state=closed")
   end
 
   def get_url(url)

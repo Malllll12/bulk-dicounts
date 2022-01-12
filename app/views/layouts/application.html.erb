@@ -10,8 +10,9 @@
   </head>
 
   <body>
-    <h3>Github Repository Name: <%= @repo_search.repo_name %></h3>
-    
+    <h3>Github Repository Name: <%= @repo_search.repo.name %></h3>
+    <h3>Pull Requests: <%= @repo_search.repo.pull_requests %></h3>
+
     <h4>User Names:</h4>
     <% @repo_search.contributor_info.each do |key, value| %>
                       <p><%= key %>: <%= value %></p>

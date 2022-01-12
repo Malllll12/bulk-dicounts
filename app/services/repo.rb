@@ -1,7 +1,8 @@
 class Repo
-  attr_reader :name
-  def initialize(data)
+  attr_reader :name, :pull_requests
+  def initialize(data, pulls)
     @name = data[:name]
+    @pull_requests = pulls[:number]
   end
 end
 

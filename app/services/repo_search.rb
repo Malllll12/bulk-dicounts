@@ -1,7 +1,7 @@
 class RepoSearch
 
-  def repo_name
-      Repo.new(service.repo).name
+  def repo
+    Repo.new(service.repo, service.pull_requets)
   end
 
   def contributor_info
@@ -13,6 +13,11 @@ class RepoSearch
       contributor_hash
   end
 
+  # def user_pr
+  #   service.user_pr.map do |data|
+  #
+  #   end
+  # end
 
   def service
     GithubService.new
