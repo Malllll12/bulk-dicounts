@@ -1,25 +1,23 @@
 class GithubService
 
-  def repo_name
-    api = get_url("little-esty-shop")
-    api[:name]
+  def repo
+    get_url("little-esty-shop")
   end
 
-  def user_names_and_commits
-    api = get_url("little-esty-shop/contributors")
-    users = {}
-    api.find_all do |user|
-      if user[:login] == "hannahkwarren"
-        users[user[:login]] = user[:contributions]
-      elsif user[:login] == "Malllll12"
-        users[user[:login]] = user[:contributions]
-      elsif user[:login] == "dkulback"
-        users[user[:login]] = user[:contributions]
-      elsif user[:login] == "Eldridge-Turambi"
-        users[user[:login]] = user[:contributions]
-      end
-    end
-    users
+  def contributors
+    get_url("little-esty-shop/contributors")
+    # api.find_all do |user|
+    #   if user[:login] == "hannahkwarren"
+    #     users[user[:login]] = user[:contributions]
+    #   elsif user[:login] == "Malllll12"
+    #     users[user[:login]] = user[:contributions]
+    #   elsif user[:login] == "dkulback"
+    #     users[user[:login]] = user[:contributions]
+    #   elsif user[:login] == "Eldridge-Turambi"
+    #     users[user[:login]] = user[:contributions]
+    #   end
+    # end
+    # users
   end
 
   def user_pr
