@@ -12,12 +12,5 @@ RSpec.describe "Bulk Discounts show page" do
     visit "/merchants/#{merch_1.id}/bulk_discounts/#{discount_a.id}"
     expect(page).to have_content(discount_a.percentage)
     expect(page).to have_content(discount_a.threshold)
-    save_and_open_page
   end
-#   Merchant Bulk Discount Show
-#
-# As a merchant
-# When I visit my bulk discount show page
-# Then I see the bulk discount's quantity threshold and percentage discount
-
 end
