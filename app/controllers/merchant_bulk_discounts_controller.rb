@@ -1,26 +1,40 @@
 class MerchantBulkDiscountsController < ApplicationController
+  before_action :merchant
   def index
-    @merchant = Merchant.find(params[:merchant_id])
+
   end
 
   def show
-    @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.find(params[:id])
   end
 
   def new
-    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
-    merchant = Merchant.find(params[:merchant_id])
     discount = merchant.bulk_discounts.create!(bulk_discount_params)
 
-    redirect_to "/merchants/#{merchant.id}/bulk_discounts"
+    redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
   end
 
   def edit
+    @bulk_discounts = BulkDiscount.find(params[:id])
+  end
 
+  def update
+    @bulk_discount = BulkDiscount.find(params[:id])
+
+    if @bulk_discount.update(bulk_discount_params)
+      redirect_to "/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}"
+      flash[:alert] = "Discount has been updated"
+    else
+      redirect_to "/merchants/#{@merchant.id}/bulk_discounts/edit"
+      flash[:error] = "Error: Discount not updated"
+    end
+  end
+
+  def merchant
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   private
