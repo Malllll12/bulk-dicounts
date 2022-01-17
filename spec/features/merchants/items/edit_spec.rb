@@ -10,8 +10,7 @@ RSpec.describe "Merchant Item Edit Page" do
 
     within '.edit_item_form' do
       expect(page).to have_content(item1.name)
-      #expect(page).to have_content(item1.description)
-      #expect(page).to have_content(item1.unit_price)
+    
       fill_in 'name', with: "pizza"
       fill_in 'description', with: "has pineapples"
       click_on 'Submit'
