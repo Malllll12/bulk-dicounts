@@ -5,6 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+BulkDiscount.destroy_all
+
+BulkDiscount.create!(name:"Discount A", percentage: 20, threshold: 10, merchant_id: 1)
+BulkDiscount.create!(name:"Discount B", percentage: 30, threshold: 15, merchant_id: 1)
+
+BulkDiscount.create!(name:"Discount A", percentage: 20, threshold: 10, merchant_id: 2)
+BulkDiscount.create!(name:"Discount B", percentage: 30, threshold: 15, merchant_id: 2)
+
+BulkDiscount.create!(name:"Discount A", percentage: 20, threshold: 10, merchant_id: 3)
+BulkDiscount.create!(name:"Discount B", percentage: 30, threshold: 15, merchant_id: 3)
     # merch_1 = Merchant.create(name: "Shop Here")
     #
     # item_1 = Item.create(name:"jumprope", description:"Pink and sparkly.", unit_price:600, merchant_id:"#{merch_1.id}")
