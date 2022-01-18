@@ -9,7 +9,7 @@ RSpec.describe "Bulk Discounts Index page" do
     discount_b = merch_1.bulk_discounts.create({name:"Discount B", percentage: 30, threshold: 15 })
     discount_c = merch_2.bulk_discounts.create({name:"Discount C", percentage: 25, threshold: 25 })
 
-    visit "/merchants/#{merch_1.id}/bulk_discounts"
+    visit merchant_bulk_discounts_path(merch_1.id)
 
     expect(page).to have_content(discount_a.name)
     expect(page).to have_content(discount_b.name)
@@ -30,11 +30,11 @@ RSpec.describe "Bulk Discounts Index page" do
     discount_b = merch_1.bulk_discounts.create({name:"Discount B", percentage: 30, threshold: 15 })
     discount_c = merch_2.bulk_discounts.create({name:"Discount C", percentage: 25, threshold: 20 })
 
-    visit "/merchants/#{merch_1.id}/bulk_discounts"
+    visit merchant_bulk_discounts_path(merch_1.id)
 
     expect(page).to have_content(discount_a.name)
     click_link "#{discount_a.name}"
-    expect(current_path).to eq("/merchants/#{merch_1.id}/bulk_discounts/#{discount_a.id}")
+    expect(current_path).to eq(merchant_bulk_discount_path(merch_1.id, discount_a.id))
   end
 
   it 'links to a create form' do
@@ -45,9 +45,10 @@ RSpec.describe "Bulk Discounts Index page" do
     discount_b = merch_1.bulk_discounts.create({name:"Discount B", percentage: 30, threshold: 15 })
     discount_c = merch_2.bulk_discounts.create({name:"Discount C", percentage: 25, threshold: 20 })
 
-    visit "/merchants/#{merch_1.id}/bulk_discounts"
+    visit merchant_bulk_discounts_path(merch_1.id)
+
     click_link "New Discount"
-    expect(current_path).to eq("/merchants/#{merch_1.id}/bulk_discounts/new")
+    expect(current_path).to eq(new_merchant_bulk_discount_path(merch_1.id))
   end
 
   it "has a delete discount function" do
@@ -58,7 +59,7 @@ RSpec.describe "Bulk Discounts Index page" do
     discount_b = merch_1.bulk_discounts.create({name:"Discount B", percentage: 30, threshold: 15 })
     discount_c = merch_1.bulk_discounts.create({name:"Discount C", percentage: 25, threshold: 20 })
 
-    visit "/merchants/#{merch_1.id}/bulk_discounts"
+    visit merchant_bulk_discounts_path(merch_1.id)
 
     within("#discounts-#{discount_a.id}") do
       expect(page).to have_link("Delete Discount")
