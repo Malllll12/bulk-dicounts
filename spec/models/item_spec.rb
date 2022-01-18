@@ -4,6 +4,7 @@ RSpec.describe Item, type: :model do
   it { should belong_to :merchant }
   it { should have_many(:invoice_items) }
   it { should have_many(:invoices).through(:invoice_items) }
+  it { should have_many(:bulk_discounts).through(:merchant) }
 
   describe '::top_five' do
     it 'returns the top 5 highest selling items' do

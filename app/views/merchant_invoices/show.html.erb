@@ -19,6 +19,9 @@
     </tr>
   <% @invoice_items.each do |inv_itm| %>
     <tr class="invoice-item-<%= inv_itm.id %>">
+
+      <h3>Discounted Revenue: <%= number_to_currency(inv_itm.discounted_revenue / 100.to_f) %></h3>
+
       <td><%= inv_itm.item.name%></td>
       <td><%=inv_itm.quantity %></td>
       <td><%=number_to_currency(inv_itm.unit_price.to_f / 100) %></td>
