@@ -104,10 +104,11 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.enabled_merchants).to contain_exactly(merch_2, merch_3)
     end
 
-    xit ".disabled_merchants" do
+    it ".disabled_merchants" do
       merch_1 = Merchant.create!(name: "Shop Here")
       merch_2 = Merchant.create!(name: "Handmade by Hannah", status: 1)
       merch_3 = Merchant.create!(name: "Curiosities", status: 1)
+      # binding.pry
       expect(Merchant.disabled_merchants).to contain_exactly(merch_1)
     end
 
