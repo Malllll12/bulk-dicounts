@@ -1,12 +1,16 @@
-<div style="float:right">
+<div class="discounted_revenue">
+  <h2>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100.to_f) %></h2>
+
+  <h2>Discounted Revenue: <%= number_to_currency(@invoice.total_discounts / 100.to_f) %></h2>
+</div>
+
   <h3>Invoice ID: <%= @invoice.id %></h3>
   <p>Invoice Status: <%= @invoice.status %></p>
   <p><%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
   <h5>Customer Name: <%= @invoice.customer.first_name + @invoice.customer.last_name%></h5>
 
-</div>
 
-<div class="invoice" style="float:left">
+<div class="invoice">
 <% @invoice.invoice_items.each do |in_item| %>
   <p><%= in_item.item.name %></p>
   <p><%= in_item.quantity %></p>
