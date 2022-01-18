@@ -134,7 +134,6 @@ RSpec.describe 'merchant invoices show page' do
     within ".invoice-item-#{invoice_item_1.id}" do
       select("shipped", from: 'invoice_item_status')
       click_button "Update Invoice item"
-
       invoice_item_1.reload
 
       expect(invoice_item_1.status).to eq("shipped")
