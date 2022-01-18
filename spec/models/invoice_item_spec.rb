@@ -38,13 +38,15 @@ RSpec.describe InvoiceItem, type: :model do
       item_2 = Item.create!(merchant_id: merchant.id, name: 'widget-2', description: 'widget description',
                             unit_price: 200)
       invoice = Invoice.create!(customer_id: customer.id, status: 'completed')
-      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_1.id, quantity: 3,
+      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_1.id, quantity: 10,
                                            unit_price: 100)
-      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_2.id, quantity: 3,
+      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_2.id, quantity: 15,
                                            unit_price: 200)
       discount_a = merchant.bulk_discounts.create({name:"Discount A", percentage: 20, threshold: 10 })
       discount_b = merchant.bulk_discounts.create({name:"Discount B", percentage: 30, threshold: 15 })
+
+      expect(invoice_item_1.ii_discount).to eq(discount_a)
+      expect(invoice_item_2.ii_discount).to eq(discount_b)
     end
   end
-
 end

@@ -10,4 +10,10 @@ class InvoiceItem < ApplicationRecord
   def full_revenue
     (unit_price * quantity)
   end
+
+  def ii_discount
+    item.merchant.bulk_discounts.where('bulk_discounts.threshold <= ?', quantity)
+                                .order(percentage: :desc)
+                                .first
+  end
 end
