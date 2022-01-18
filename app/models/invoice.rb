@@ -24,5 +24,3 @@ class Invoice < ApplicationRecord
     .distinct(:id)
   end
 end
-
-# bulk_discounts[0].percentage.to_f/ 100 < this returns a mathable float
