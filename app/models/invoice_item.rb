@@ -12,7 +12,7 @@ class InvoiceItem < ApplicationRecord
   end
 
   def ii_discount
-    item.merchant.bulk_discounts.where('bulk_discounts.threshold <= ?', quantity)
+    item.merchant.bulk_discounts.where('threshold <= ?', quantity)
                                 .order(percentage: :desc)
                                 .first
   end

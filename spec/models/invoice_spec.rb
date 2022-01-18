@@ -77,4 +77,25 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.incomplete_invoices.to_a).to eq([invoice_3, invoice_1])
     end
   end
+
+  describe "total_discounts" do
+    it 'finds the total discounted revenue' do
+      merchant = Merchant.create!(name: 'Shop Here')
+      not_included_merchant = Merchant.create!(name: 'Dont Shop Here')
+      customer = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
+      item_1 = Item.create!(merchant_id: merchant.id, name: 'widget-1', description: 'widget description',
+                            unit_price: 100)
+      item_2 = Item.create!(merchant_id: merchant.id, name: 'widget-2', description: 'widget description',
+                            unit_price: 200)
+      invoice = Invoice.create!(customer_id: customer.id, status: 'completed')
+      invoice_item_1 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_1.id, quantity: 10,
+                                           unit_price: 100)
+      invoice_item_2 = InvoiceItem.create!(invoice_id: invoice.id, item_id: item_2.id, quantity: 15,
+                                           unit_price: 200)
+      discount_a = merchant.bulk_discounts.create({name:"Discount A", percentage: 20, threshold: 10 })
+      discount_b = merchant.bulk_discounts.create({name:"Discount B", percentage: 30, threshold: 15 })
+
+      expect(invoice.total_discounts).to eq(2900.0)
+    end
+  end
 end

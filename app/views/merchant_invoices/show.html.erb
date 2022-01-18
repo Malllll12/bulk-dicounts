@@ -3,11 +3,14 @@
   <p>Invoice Status <%= @invoice.status %></p>
   <p>Invoice Customer <%= @invoice.customer.first_name %>, <%= @invoice.customer.last_name %></p>
   <p>Invoice Created at: <%= @invoice.created_at.strftime("%A %B %d %Y") %></p>
-
 </div>
+
 <div class="revenue">
   <h3>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100.to_f) %></h3>
+  <h3>Discounted Revenue: <%= number_to_currency(@invoice.total_discounts / 100.to_f) %></h3>
+
 </div>
+
 <div class = "invoice-items">
   <table>
     <tr>
@@ -18,10 +21,14 @@
       <th>Submit</th>
     </tr>
   <% @invoice_items.each do |inv_itm| %>
+
+    <% if inv_itm.ii_discount.nil? %>
+      <p>SORRY! No available discounts for this item. Have you considered buying more stuff? </p>
+      <% else %>
+      <p>Qualified Discounts: <%= link_to inv_itm.ii_discount.id, merchant_bulk_discount_path(@merchant.id, inv_itm.ii_discount.id)%></p>
+      <% end %>
+
     <tr class="invoice-item-<%= inv_itm.id %>">
-
-      <h3>Discounted Revenue: <%= number_to_currency(inv_itm.discounted_revenue / 100.to_f) %></h3>
-
       <td><%= inv_itm.item.name%></td>
       <td><%=inv_itm.quantity %></td>
       <td><%=number_to_currency(inv_itm.unit_price.to_f / 100) %></td>
@@ -30,6 +37,7 @@
       <% end %>
     </tr>
   </div>
+
   <% end %>
   </table>
 </div>

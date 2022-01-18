@@ -23,4 +23,11 @@ class Invoice < ApplicationRecord
     .order(created_at: :asc)
     .distinct(:id)
   end
+
+  def total_discounts
+    total = invoice_items.map do |ii|
+      ii.discounted_revenue
+    end
+    total.sum
+  end
 end
