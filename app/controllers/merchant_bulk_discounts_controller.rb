@@ -21,16 +21,9 @@ class MerchantBulkDiscountsController < ApplicationController
   end
 
   def update
-    @bulk_discount = BulkDiscount.find(params[:id])
-
-    if @bulk_discount.update(bulk_discount_params)
-      redirect_to "/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}"
-      flash[:alert] = "Discount has been updated"
-    else
-      # render instead of redirect_to
-      redirect_to "/merchants/#{@merchant.id}/bulk_discounts/edit"
-      flash[:error] = "Error: Discount not updated"
-    end
+    bulk_discount = BulkDiscount.find(params[:id])
+    bulk_discount.update(bulk_discount_params)
+    redirect_to  merchant_bulk_discount_path(@merchant, bulk_discount)
   end
 
   def destroy
