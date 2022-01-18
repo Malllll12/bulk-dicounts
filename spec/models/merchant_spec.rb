@@ -103,7 +103,7 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.enabled_merchants).to contain_exactly(merch_2, merch_3)
     end
 
-    it ".disabled_merchants" do
+    xit ".disabled_merchants" do
       merch_1 = Merchant.create!(name: "Shop Here")
       merch_2 = Merchant.create!(name: "Handmade by Hannah", status: 1)
       merch_3 = Merchant.create!(name: "Curiosities", status: 1)
@@ -209,10 +209,7 @@ RSpec.describe Merchant, type: :model do
         expect(merch_3.best_day).to eq(invoice_3.created_at)
         expect(merch_4.best_day).to eq(invoice_4.created_at)
         expect(merch_5.best_day).to eq(invoice_5.created_at)
-
       end
     end
-
   end
-
 end
