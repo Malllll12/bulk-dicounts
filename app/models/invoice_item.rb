@@ -16,4 +16,12 @@ class InvoiceItem < ApplicationRecord
                                 .order(percentage: :desc)
                                 .first
   end
+
+  def discounted_revenue
+    if ii_discount.nil?
+      full_revenue
+    else
+      (full_revenue * (1 - (ii_discount.percentage/ 100.00)))
+    end
+  end
 end
