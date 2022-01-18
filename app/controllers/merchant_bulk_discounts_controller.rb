@@ -1,7 +1,6 @@
 class MerchantBulkDiscountsController < ApplicationController
   before_action :merchant
   def index
-
   end
 
   def show
@@ -28,6 +27,7 @@ class MerchantBulkDiscountsController < ApplicationController
       redirect_to "/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}"
       flash[:alert] = "Discount has been updated"
     else
+      # render instead of redirect_to
       redirect_to "/merchants/#{@merchant.id}/bulk_discounts/edit"
       flash[:error] = "Error: Discount not updated"
     end
@@ -36,7 +36,7 @@ class MerchantBulkDiscountsController < ApplicationController
   def destroy
     bulk_discount = BulkDiscount.find(params[:id])
     merchant.bulk_discounts.delete(bulk_discount)
-    redirect_to "/merchants/#{@merchant.id}/bulk_discounts"    
+    redirect_to "/merchants/#{@merchant.id}/bulk_discounts"
   end
 
   def merchant
