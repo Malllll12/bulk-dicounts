@@ -17,6 +17,7 @@ RSpec.describe 'merchant invoices show page' do
       expect(page).to have_content(customer.last_name)
     end
   end
+
   it 'lists items for an invoice and their attributes' do
     merchant = Merchant.create!(name: 'merchant name')
     not_included_merchant = Merchant.create!(name: 'merchant name')

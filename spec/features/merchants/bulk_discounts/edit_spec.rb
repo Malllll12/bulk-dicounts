@@ -16,11 +16,12 @@ RSpec.describe "Bulk Discount edit page" do
     fill_in(:threshold, with: 5)
     click_button "Update Discount"
 
-    expect(current_path).to eq( "/merchants/#{merch_1.id}/bulk_discounts/#{discount_a.id}")
+    expect(current_path).to eq(merchant_bulk_discount_path(merch_1.id, discount_a.id))
     expect(page).to have_content("New Deal: 15% off 5 items or more!")
+    expect(page).to have_content("Discount Updated Successfully")
   end
 
-  it "returns an error message if form is incorrect" do
+  it "if edit form is Incorrectly filled out the user is redirected" do
     merch_1 = Merchant.create!(name: "Shop Here")
     merch_2 = Merchant.create!(name: "Buy Here")
 
@@ -35,7 +36,8 @@ RSpec.describe "Bulk Discount edit page" do
     fill_in(:threshold, with: 5)
     click_button "Update Discount"
 
-    expect(current_path).to eq( "/merchants/#{merch_1.id}/bulk_discounts/#{discount_a.id}")
-    expect(page).to_not have_content("New Deal: 15% off 5 items or more!")
+    expect(current_path).to eq(edit_merchant_bulk_discount_path(merch_1.id, discount_a.id))
+    expect(page).to_not have_content("15% off 5 items or more!")
+    expect(page).to have_content("Incorrect Input: Do it again.")
   end
 end

@@ -1,6 +1,6 @@
 <div class="new_discount_form">
   <h3>Create New Discount</h3>
-  <%= form_with url: "/merchants/#{@merchant.id}/bulk_discounts", method: :post, local: true do |f|%>
+  <%= form_with url: merchant_bulk_discounts_path(@merchant.id), method: :post, local: true do |f|%>
     <%= f.label "name" %>
     <%= f.text_field :name %>
 

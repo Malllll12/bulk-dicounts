@@ -3,6 +3,10 @@
 <p><%= link_to "Items Index", "/merchants/#{@merchant.id}/items"%></p>
 <p><%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices"%></p>
 
+<div class="bulk-discounts">
+  <h1><%=link_to "Bulk Discounts", "/merchants/#{@merchant.id}/bulk_discounts"%></h1>
+</div>
+
 <h3><div class="items-ready-to-ship">Items Ready To Ship</h3>
   <% @merchant.items_ready_to_ship.each do |invoice_item| %>
     <p><%= invoice_item.item.name %></p>
@@ -14,8 +18,4 @@
   <% @merchant.merchants_favorite_customers.each do |customer| %>
     <%= customer.first_name %> <%= customer.last_name %> | Successful Transactions: <%= customer.transactions.count %>
     <% end %>
-</div>
-
-<div class="bulk-discounts">
-  <h1><%=link_to "Bulk Discounts", "/merchants/#{@merchant.id}/bulk_discounts/"%></h1>
 </div>
