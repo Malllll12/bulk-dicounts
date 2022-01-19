@@ -15,8 +15,6 @@ RSpec.describe "New Bulk Discount page" do
     expect(page).to have_link('Buy Bulk!')
     expect(page).to have_content('%20')
     expect(page).to have_content(10)
-    save_and_open_page
-
   end
 
   it "if form is incorrect they are redirected to try again" do
