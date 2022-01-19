@@ -21,8 +21,13 @@ class MerchantBulkDiscountsController < ApplicationController
 
   def update
     bulk_discount = BulkDiscount.find(params[:id])
-    bulk_discount.update(bulk_discount_params)
-    redirect_to  merchant_bulk_discount_path(@merchant, bulk_discount)
+    if bulk_discount.update(bulk_discount_params)
+      redirect_to  merchant_bulk_discount_path(@merchant, bulk_discount)
+      flash[:alert] = "Discount Updated Successfully"
+    else
+      redirect_to  edit_merchant_bulk_discount_path(@merchant, bulk_discount)
+      flash[:error] = "Incorrect Input: Do it again."
+    end
   end
 
   def destroy
