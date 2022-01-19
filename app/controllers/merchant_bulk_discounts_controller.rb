@@ -11,8 +11,14 @@ class MerchantBulkDiscountsController < ApplicationController
   end
 
   def create
-    discount = merchant.bulk_discounts.create!(bulk_discount_params)
-    redirect_to merchant_bulk_discounts_path(@merchant.id)
+      discount = merchant.bulk_discounts.create(bulk_discount_params)
+    if discount.save(bulk_discount_params)
+      redirect_to merchant_bulk_discounts_path(@merchant.id)
+      flash[:alert] = "Discount Created Successfully. Huzzah."
+    else
+      redirect_to new_merchant_bulk_discount_path(@merchant.id)
+      flash[:error] = "Incorrect Input. Go again."
+    end
   end
 
   def edit
